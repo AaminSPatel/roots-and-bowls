@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+:root {
+  --charcoal: #1a1a1a;
+  --charcoal-800: #242424;
+  --charcoal-700: #2e2e2e;
+  --charcoal-600: #3a3a3a;
+  --orange: #ff4d00;
+  --orange-dark: #cc3d00;
+  --amber: #ffb800;
+  --amber-light: #ffd166;
+  --white: #ffffff;
+  --white-60: rgba(255, 255, 255, 0.6);
+  --white-20: rgba(255, 255, 255, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--charcoal);
+  color: var(--white);
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── EMBER PARTICLE FLOAT ── */
+@keyframes emberFloat {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(-30vh) translateX(15px) scale(0.8);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-60vh) translateX(-10px) scale(0.6);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateY(-85vh) translateX(20px) scale(0.3);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(0px) scale(0.1);
+    opacity: 0;
+  }
+}
+
+@keyframes emberPulse {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+@keyframes emberGlow {
+  0%, 100% { box-shadow: 0 0 6px 2px rgba(255, 77, 0, 0.6); }
+  50% { box-shadow: 0 0 14px 5px rgba(255, 184, 0, 0.8); }
+}
+
+.ember-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: emberFloat linear infinite;
+}
+
+/* ── NEON GLOW BORDER ── */
+.glow-border {
+  border: 1px solid rgba(255, 77, 0, 0.3);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.glow-border:hover {
+  border-color: rgba(255, 77, 0, 0.7);
+  box-shadow: 0 0 20px rgba(255, 77, 0, 0.25), 0 0 60px rgba(255, 77, 0, 0.1);
+}
+
+/* ── TYPEWRITER ANIMATION ── */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blinkCaret {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: var(--orange); }
+}
+
+.typewriter-text {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 2.5s steps(30) 0.5s forwards;
+  width: 0;
+}
+
+/* ── ORANGE GRADIENT TEXT ── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--amber) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── CARD 3D TILT (handled via framer motion but fallback) ── */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease;
+}
+
+/* ── ORANGE GLOW ON HOVER ── */
+.orange-glow-hover {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.orange-glow-hover:hover {
+  box-shadow: 0 20px 60px rgba(255, 77, 0, 0.3);
+  transform: translateY(-4px);
+}
+
+/* ── FIRE GRADIENT BG ── */
+.fire-gradient {
+  background: radial-gradient(ellipse at 50% 100%, rgba(255, 77, 0, 0.25) 0%, rgba(255, 184, 0, 0.08) 40%, transparent 70%);
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--charcoal-800);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--orange-dark);
+  border-radius: 3px;
+}
+
+/* ── SELECTION ── */
+::selection {
+  background: var(--orange);
+  color: white;
+}
+
+/* ── SECTION DIVIDER ── */
+.ember-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--orange), var(--amber), transparent);
+}
+
+/* ── NAV BLUR ── */
+.nav-blur {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+/* ── TAG STYLES ── */
+.tag-v { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
+.tag-vg { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+.tag-gf { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+.tag-spicy { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+/* ── BESTSELLER BADGE ── */
+.bestseller-badge {
+  background: linear-gradient(135deg, #ff4d00, #ffb800);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+/* ── MENU TAB ACTIVE ── */
+.menu-tab-active {
+  background: linear-gradient(135deg, var(--orange), var(--amber));
+  color: white;
+}
+.menu-tab-inactive {
+  background: var(--charcoal-700);
+  color: rgba(255, 255, 255, 0.6);
+}
+.menu-tab-inactive:hover {
+  background: var(--charcoal-600);
+  color: white;
+}
+
+/* ── FOCUS VISIBLE ── */
+:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ember-particle, .typewriter-text {
+    animation: none;
+  }
+}
