@@ -1,274 +1,144 @@
-"use client";
-
-import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import FloatingLeaves from "@/components/FloatingLeaves";
 import Link from "next/link";
-import { FiArrowRight } from "react-icons/fi";
+import { HiArrowRight } from "react-icons/hi";
 
-/* export const metadata = {
+export const metadata = {
   title: "Our Story",
-  description:
-    "How two friends decided to change Mumbai's dining scene. The story of Zest & Ember — farm-to-flame philosophy, fire, and fusion.",
-}; */
-
-const fadeUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
+  description: "Meet Priya and Arjun — the nutritionist and chef duo who set out to fix Bengaluru's broken office food culture. The story of Roots & Bowls.",
 };
+
+const timeline = [
+  { year: "2021", event: "Priya and Arjun meet at a Bengaluru wellness summit. Both frustrated. Both hungry for change." },
+  { year: "2022 Jan", event: "First test kitchen in Arjun's apartment. 11 menu iterations, 40 kg of wasted quinoa, and one clear winner: the Desi Vitality Bowl." },
+  { year: "2022 Jun", event: "Roots & Bowls opens at Indiranagar. Launch week fully sold out. 200-bowl waitlist on day three." },
+  { year: "2023", event: "Launched meal prep subscription. Onboarded first 100 farm partners. Reached 200 daily bowls." },
+  { year: "2024", event: "500+ weekly subscribers. Expanded catering to corporate wellness events. Zero preservatives, zero shortcuts." },
+];
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen pt-24" style={{ background: "#1A1A1A" }}>
-      {/* ── HERO ── */}
-      <section className="relative py-20 overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at 50% 0%, rgba(255,77,0,0.20) 0%, transparent 60%), #1A1A1A",
-          }}
-        />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
-          <motion.div {...fadeUp}>
-            <p className="text-[#FF4D00] text-sm font-semibold uppercase tracking-widest mb-4">Our Story</p>
-            <h1
-              className="text-5xl sm:text-7xl font-black text-white leading-none mb-6"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              Born from
-              <br />
-              <span
-                style={{
-                  background: "linear-gradient(135deg, #FF4D00, #FFB800)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                a Quiet City
-              </span>
+    <>
+      <Navbar />
+      <main>
+        {/* Hero */}
+        <section className="relative pt-32 pb-20 overflow-hidden watercolor-overlay"
+          style={{ background: "linear-gradient(160deg, #EEF2EA 0%, #F4F0E8 100%)" }}>
+          <FloatingLeaves count={4} />
+          <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center">
+            <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--sage-dark)" }}>Our Story</span>
+            <h1 className="text-4xl md:text-5xl font-bold mt-3 mb-5" style={{ fontFamily: "var(--font-display)", color: "var(--olive)" }}>
+              We Built the Cafe<br />We Wished Existed
             </h1>
-            <p className="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto">
-              A pandemic. Two old friends. One stubborn idea: that Mumbai deserved a restaurant without compromises.
+            <p className="text-lg leading-relaxed" style={{ color: "var(--olive-light)" }}>
+              Two people. One shared frustration. A city full of people trying to eat well with nowhere good to go.
             </p>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* ── FULL-BLEED IMAGE ── */}
-      <div className="relative h-72 sm:h-96 overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80"
-          alt="Zest & Ember interior"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A]/60 via-transparent to-[#1A1A1A]" />
-      </div>
-
-      {/* ── ORIGIN STORY ── */}
-      <section className="py-20 px-4 sm:px-6 max-w-3xl mx-auto">
-        <motion.div {...fadeUp} className="space-y-6 text-white/70 leading-relaxed text-base sm:text-lg">
-          <h2
-            className="text-3xl sm:text-4xl font-black text-white mb-8"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
-            The Year the City Went Quiet
-          </h2>
-          <p>
-            April 2020. Mumbai was under lockdown, and Chef Aryan Kapoor was sitting in his one-bedroom flat in Bandra, rewatching episodes of Chef's Table and feeling a particular kind of professional grief. He had just returned from a stage at a three-star restaurant in Kyoto, notebooks full of ideas, palate recalibrated, spirit renewed — only to land in a city that had suddenly forgotten what restaurants were for.
-          </p>
-          <p>
-            His childhood friend Meera Nair was in a different kind of frustration. A sommelier who had pivoted into hospitality consulting, she had spent five years helping restaurants in Delhi, Bengaluru, and Mumbai become more thoughtful — better wine lists, more coherent cuisine narratives, staff who understood what they were serving and why. She watched those restaurants shut overnight and felt the loss of something she hadn't realised she'd been building toward.
-          </p>
-          <p>
-            The phone call that started everything happened at 11 PM on a Tuesday in May 2020. Aryan called Meera to ask a question he said he'd been afraid to ask anyone: "What if we stopped consulting other people's restaurants and just made the one we've always wanted?" Meera said yes before he finished the sentence.
-          </p>
-          <p>
-            What followed was eighteen months of the most productive and difficult work either of them had done. Recipe testing happened in Aryan's kitchen and on borrowed equipment. The menu went through eleven full revisions. They visited farms in Nashik, Karjat, and the Konkan coast. They flew to Barcelona to tour the Josper factory and came back with a deposit paid on the oven that would become the restaurant's signature.
-          </p>
-          <p>
-            The space on Linking Road — a shuttered textile warehouse with 18-foot ceilings and the ghost of a bygone Bandra — was found through a mutual friend in October 2021. The renovation took fourteen months and cost more than they had planned. But what emerged was exactly what they had imagined: dark, warm, theatrical, and very, very Mumbai.
-          </p>
-          <p>
-            Zest & Ember opened on a Wednesday evening in March 2022, with a queue of sixty people who had been following their journey on Instagram. Every table was full. The first batch of Ember Negronis sold out by 9 PM. Aryan's Szechuan sea bass made a food writer from Condé Nast Traveller put down her pen and just eat. That night, they knew they had built something real.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* ── FARM TO FLAME ── */}
-      <section className="py-20" style={{ background: "#111" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div {...fadeUp}>
-              <p className="text-[#FF4D00] text-sm font-semibold uppercase tracking-widest mb-3">Sourcing Philosophy</p>
-              <h2
-                className="text-3xl sm:text-4xl font-black text-white mb-6"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                Farm to Flame
-              </h2>
-              <div className="space-y-5 text-white/65 leading-relaxed">
-                <p>
-                  We visit every farm we source from. It's not a marketing statement — it's a practical one. When Aryan knows a farmer's name and can picture the soil his tomatoes grew in, the food he cooks is different. It's more accountable. It matters in a different way.
-                </p>
-                <p>
-                  Our vegetables and herbs come from three organic farms in Nashik and Pune, all within a 200km radius. Our fish arrives daily from Sassoon Docks, selected each morning by our sous-chef. The lamb and pork we use is traceable to specific farms in Karjat. The herbs we can't buy we grow ourselves — on a small rooftop terrace above the kitchen that has become its own kind of obsession for the team.
-                </p>
-                <p>
-                  We are not precious about this. We don't put farm names on the menu like trophies. We do it because the food tastes better, because it's better for the ecosystem we're part of, and because we want the people who grow our food to be able to sustain their work.
-                </p>
+        {/* Founders */}
+        <section className="py-20 px-4 sm:px-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
+            <div>
+              <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&q=80" alt="Priya Nair, Co-founder"
+                className="rounded-2xl w-full object-cover aspect-[4/5]" />
+            </div>
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--sage-dark)" }}>Co-Founder</span>
+              <h2 className="text-3xl font-bold mt-2 mb-4" style={{ fontFamily: "var(--font-display)", color: "var(--olive)" }}>Priya Nair</h2>
+              <p className="text-sm font-medium mb-4" style={{ color: "var(--terracotta)" }}>Clinical Nutritionist, IHN Bengaluru · 12 years practice</p>
+              <div className="text-base leading-loose space-y-4" style={{ color: "var(--olive-light)" }}>
+                <p>Priya spent a decade advising corporate Bengaluru on nutrition — and spent a decade watching those same clients walk out of her clinic and into a food court with zero healthy options. She'd recommend quinoa bowls, and they'd end up eating paneer butter masala from the office canteen because there was nothing else.</p>
+                <p>The gap between what she prescribed and what was available wasn't a willpower problem. It was an infrastructure problem. Bengaluru, despite having one of India's most health-aware populations, had essentially no daily-use healthy dining option that was also genuinely delicious.</p>
+                <p>Priya designed the nutritional architecture of every Roots & Bowls offering — macro targets, ingredient combinations for bioavailability, the careful ratio of complex carbs to protein that keeps energy steady through an eight-hour work day. Every item on the menu is something she'd prescribe to a client.</p>
               </div>
+            </div>
+          </div>
 
-              <div className="mt-8 grid grid-cols-3 gap-4">
-                {[
-                  { number: "200km", label: "Sourcing radius" },
-                  { number: "3", label: "Partner farms" },
-                  { number: "Daily", label: "Fresh fish delivery" },
-                ].map((s) => (
-                  <div key={s.label} className="text-center p-4 rounded-xl" style={{ background: "#1A1A1A" }}>
-                    <p
-                      className="text-2xl font-black"
-                      style={{
-                        background: "linear-gradient(135deg, #FF4D00, #FFB800)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
-                      }}
-                    >
-                      {s.number}
-                    </p>
-                    <p className="text-white/50 text-xs mt-1">{s.label}</p>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="md:order-2">
+              <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=1200&q=80" alt="Arjun Sharma, Co-founder"
+                className="rounded-2xl w-full object-cover aspect-[4/5]" />
+            </div>
+            <div className="md:order-1">
+              <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--sage-dark)" }}>Co-Founder</span>
+              <h2 className="text-3xl font-bold mt-2 mb-4" style={{ fontFamily: "var(--font-display)", color: "var(--olive)" }}>Arjun Sharma</h2>
+              <p className="text-sm font-medium mb-4" style={{ color: "var(--terracotta)" }}>Chef · Culinary Arts, IHM Chennai · Plant-Based Specialist</p>
+              <div className="text-base leading-loose space-y-4" style={{ color: "var(--olive-light)" }}>
+                <p>Arjun trained at IHM Chennai and then spent three years cooking for private wellness clients — athletes, executives, new mothers — before growing tired of the limited reach. Good food, he believed, shouldn't be a luxury for people who could afford a private chef.</p>
+                <p>His culinary philosophy is simple: healthy food that doesn't taste healthy. The Desi Vitality Bowl, the Green Machine juice, the Coconut Mango Mousse — every recipe went through a brutal test: would he be happy eating this every week? If the answer was anything less than yes, it didn't make the menu.</p>
+                <p>Arjun sources directly where possible, drives to farms, argues about tomato ripeness, and once rejected an entire shipment of avocados because they weren't from Coorg. He is, by most accounts, extremely difficult to work with in the best possible way.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Timeline */}
+        <section className="py-20" style={{ background: "var(--cream)" }}>
+          <div className="max-w-2xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold" style={{ fontFamily: "var(--font-display)", color: "var(--olive)" }}>How We Got Here</h2>
+            </div>
+            <div className="relative">
+              <div className="absolute left-16 top-0 bottom-0 w-px" style={{ background: "var(--sand)" }}></div>
+              <ul className="flex flex-col gap-8">
+                {timeline.map((t) => (
+                  <li key={t.year} className="flex gap-6 items-start">
+                    <div className="w-16 shrink-0 text-right text-xs font-bold pt-0.5" style={{ color: "var(--terracotta)" }}>{t.year}</div>
+                    <div className="w-3 h-3 rounded-full shrink-0 mt-1 relative z-10" style={{ background: "var(--sage)", border: "2px solid var(--warm-white)" }}></div>
+                    <p className="text-sm leading-relaxed" style={{ color: "var(--olive-light)" }}>{t.event}</p>
+                  </li>
                 ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="relative"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=800&q=80"
-                alt="Farm fresh ingredients"
-                className="rounded-2xl w-full h-80 object-cover"
-              />
-              <div className="absolute -bottom-6 -right-4 rounded-2xl overflow-hidden w-48 h-48 border-4 border-[#1A1A1A]">
-                <img
-                  src="https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=400&q=80"
-                  alt="Josper oven"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CHEF BIO ── */}
-      <section className="py-20 px-4 sm:px-6 max-w-7xl mx-auto">
-        <motion.div {...fadeUp} className="text-center mb-12">
-          <p className="text-[#FF4D00] text-sm font-semibold uppercase tracking-widest mb-3">The People</p>
-          <h2 className="text-4xl font-black text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
-            The Team Behind the Fire
-          </h2>
-        </motion.div>
-
-        {/* Head Chef */}
-        <motion.div
-          {...fadeUp}
-          className="rounded-3xl overflow-hidden mb-8"
-          style={{ background: "#242424" }}
-        >
-          <div className="grid lg:grid-cols-5">
-            <div className="lg:col-span-2 h-72 lg:h-auto">
-              <img
-                src="https://images.unsplash.com/photo-1587564504116-c0e13f1b4e45?w=800&q=80"
-                alt="Chef Aryan Kapoor"
-                className="w-full h-full object-cover object-top"
-              />
-            </div>
-            <div className="lg:col-span-3 p-8 lg:p-12">
-              <span className="text-[#FF4D00] text-xs font-bold uppercase tracking-widest">Head Chef & Co-Founder</span>
-              <h3
-                className="text-3xl font-black text-white mt-2 mb-5"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                Chef Aryan Kapoor
-              </h3>
-              <div className="space-y-4 text-white/60 leading-relaxed">
-                <p>
-                  Aryan grew up in Colaba in a family where Sunday meals were serious business — his mother a home cook of extraordinary instinct, his father a man who drove an hour to find a specific fishmonger. Food, for him, was never casual.
-                </p>
-                <p>
-                  He trained at the Culinary Institute of America before staging at Le Bernardin in New York, Narisawa in Tokyo, and Mirazur in Menton. Each experience left a mark: the precision of French technique, the Japanese obsession with seasonality and restraint, the Mediterranean ease with simplicity. He brought all of it back to Mumbai, filtered through the specific lens of having grown up eating here.
-                </p>
-                <p>
-                  His cooking philosophy is simple enough to state and difficult enough to execute: make the best possible version of a dish, using the best possible local ingredients, with the most respectful and interesting technique available. Don't add more. Remove everything that doesn't serve the dish.
-                </p>
-              </div>
+              </ul>
             </div>
           </div>
-        </motion.div>
+        </section>
 
-        {/* Bar Manager */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="rounded-3xl overflow-hidden"
-          style={{ background: "#242424" }}
-        >
-          <div className="grid lg:grid-cols-5">
-            <div className="lg:col-span-3 p-8 lg:p-12 order-2 lg:order-1">
-              <span className="text-[#FFB800] text-xs font-bold uppercase tracking-widest">Bar Manager</span>
-              <h3
-                className="text-3xl font-black text-white mt-2 mb-5"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                Rohan Shetty
-              </h3>
-              <div className="space-y-4 text-white/60 leading-relaxed">
-                <p>
-                  Rohan has been shaking things up in Mumbai's cocktail scene since 2016, when he returned from two years bartending in Melbourne with a distrust of conventional cocktail menus and a fascination with fermentation. He has since built bar programmes at three of Mumbai's most celebrated restaurants and consulted for a craft spirits brand based in Goa.
-                </p>
-                <p>
-                  At Zest & Ember, his brief was simple: build a bar that is as thoughtful as the kitchen. The result is a cocktail menu that thinks in flavour systems rather than classics — a Negroni riff that uses cedar smoke and house bitter orange amaro, a Bandra Sour that reaches for tamarind shrub and activated charcoal ice.
-                </p>
-                <p>
-                  Every syrup, shrub, and tonic is made in-house. The non-alcoholic programme receives the same attention as the full bar. Rohan's goal is simple: a guest should be able to drink all evening at Zest & Ember and feel like they've had an experience, not just alcohol.
-                </p>
+        {/* Sourcing */}
+        <section className="py-20 px-4 sm:px-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--sage-dark)" }}>Farm-to-Bowl</span>
+              <h2 className="text-3xl font-bold mt-2 mb-6" style={{ fontFamily: "var(--font-display)", color: "var(--olive)" }}>
+                We Know Where Every Ingredient Comes From
+              </h2>
+              <div className="text-base leading-loose space-y-4" style={{ color: "var(--olive-light)" }}>
+                <p>Not because it's a marketing line, but because we've been there. We visit farms. We know the cooperative heads by name. We've seen the fields where our millets grow and the orchards where our avocados ripen.</p>
+                <p>Our sourcing map: heritage millets from the Karnataka Farmers Collective (60+ smallholder farmers near Dharwad), vine tomatoes from Hesaraghatta, avocados from Coorg, organic lentils from Madhya Pradesh, seasonal fruits from local mandis, certified organic quinoa from Rajasthan.</p>
+                <p>We pay above-market prices to our farm partners because we've seen what below-market pricing does to agricultural communities. And because food that comes from a place of care tastes different. You can taste the difference.</p>
               </div>
             </div>
-            <div className="lg:col-span-2 h-72 lg:h-auto order-1 lg:order-2">
-              <img
-                src="https://images.unsplash.com/photo-1560512823-829485b8bf24?w=800&q=80"
-                alt="Rohan Shetty, Bar Manager"
-                className="w-full h-full object-cover"
-              />
+            <div>
+              <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=80" alt="Farm sourcing"
+                className="rounded-2xl w-full object-cover aspect-[4/3]" />
             </div>
           </div>
-        </motion.div>
-      </section>
+        </section>
 
-      {/* ── CTA ── */}
-      <section className="py-20 text-center px-4 sm:px-6" style={{ background: "#111" }}>
-        <motion.div {...fadeUp}>
-          <p className="text-white/60 mb-2">You know the story. Now taste it.</p>
-          <h2 className="text-3xl font-black text-white mb-8" style={{ fontFamily: "'Playfair Display', serif" }}>
-            Come Join Our Table
-          </h2>
-          <Link
-            href="/reservations"
-            className="inline-flex items-center gap-2 px-10 py-4 rounded-full text-white font-bold hover:opacity-90 hover:scale-105 transition-all"
-            style={{ background: "linear-gradient(135deg, #FF4D00, #FFB800)" }}
-          >
-            Reserve Now <FiArrowRight />
-          </Link>
-        </motion.div>
-      </section>
-    </div>
+        {/* Community */}
+        <section className="py-20 text-white" style={{ background: "var(--olive)" }}>
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+            <h2 className="text-3xl font-bold mb-6" style={{ fontFamily: "var(--font-display)" }}>Community Nutrition Initiatives</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8 text-left">
+              {[
+                { title: "School Nutrition Workshops", desc: "Monthly sessions at government schools in East Bengaluru on reading food labels, understanding macros, and cooking simple healthy meals." },
+                { title: "Subsidised Meal Subscription", desc: "We offer 20% discounted meal prep plans for full-time caregivers and new mothers through our Community Health Partner programme." },
+                { title: "Chef Internships", desc: "Partnering with culinary schools to offer paid internships focused on plant-based cooking — the discipline most curricula ignore." },
+              ].map((c) => (
+                <div key={c.title} className="rounded-xl p-5" style={{ background: "rgba(255,255,255,0.07)" }}>
+                  <h3 className="font-semibold mb-2" style={{ fontFamily: "var(--font-display)" }}>{c.title}</h3>
+                  <p className="text-sm leading-relaxed opacity-75">{c.desc}</p>
+                </div>
+              ))}
+            </div>
+            <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold border border-white/30 transition-all hover:bg-white/10">
+              Partner with us <HiArrowRight />
+            </Link>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 }

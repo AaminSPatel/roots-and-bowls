@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import TrekCard from "./TrekCard";
+import TrekCard from "../MacroBar";
 
 const DIFFICULTIES = ["All", "Easy", "Moderate", "Difficult"];
 const TYPES = ["All", "Trek", "Expedition", "Camping"];

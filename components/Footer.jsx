@@ -1,111 +1,112 @@
 import Link from "next/link";
-import { FiInstagram, FiFacebook, FiPhone, FiMail, FiMapPin } from "react-icons/fi";
-import { RiWhatsappLine } from "react-icons/ri";
-import { GiFireBowl } from "react-icons/gi";
+import { FaInstagram } from "react-icons/fa";
+import { SiZomato, SiSwiggy } from "react-icons/si";
+import { HiLocationMarker, HiPhone, HiMail } from "react-icons/hi";
 import { siteConfig } from "@/lib/siteData";
+
+const footerLinks = {
+  Explore: [
+    { href: "/menu", label: "Full Menu" },
+    { href: "/meal-prep", label: "Meal Prep Plans" },
+    { href: "/catering", label: "Corporate Catering" },
+    { href: "/order", label: "Order Online" },
+  ],
+  Learn: [
+    { href: "/about", label: "Our Story" },
+    { href: "/blog", label: "Nutrition Blog" },
+    { href: "/contact", label: "Contact Us" },
+  ],
+};
 
 export default function Footer() {
   return (
-    <footer className="bg-[#111] border-t border-white/10 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+    <footer style={{ background: "var(--olive)", color: "var(--cream)" }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-14 pb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-[#FF4D00] text-2xl"><GiFireBowl /></span>
-              <span
-                className="text-white font-bold text-xl"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                Zest &amp; Ember
+              <span className="text-2xl">🌿</span>
+              <span style={{ fontFamily: "var(--font-display)" }} className="font-bold text-xl text-white">
+                Roots<span style={{ color: "var(--terracotta-light)" }}>&</span>Bowls
               </span>
             </div>
-            <p className="text-white/50 text-sm leading-relaxed mb-5">
-              Where every bite has a story. Fusion dining at its most intentional — Bandra West, Mumbai.
+            <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(232,223,208,0.75)" }}>
+              Bengaluru's most loved plant-forward cafe. No preservatives. No compromise. Just real food.
             </p>
             <div className="flex gap-3">
-              <a href={siteConfig.contact.instagram} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-[#FF4D00] hover:text-[#FF4D00] transition-colors">
-                <FiInstagram size={15} />
+              <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:opacity-80"
+                style={{ background: "rgba(255,255,255,0.1)" }}>
+                <FaInstagram size={16} />
               </a>
-              <a href={siteConfig.contact.facebook} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-[#FF4D00] hover:text-[#FF4D00] transition-colors">
-                <FiFacebook size={15} />
+              <a href={siteConfig.social.zomato} target="_blank" rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:opacity-80"
+                style={{ background: "rgba(255,255,255,0.1)" }}>
+                <SiZomato size={15} />
               </a>
-              <a href={siteConfig.contact.whatsapp} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-[#25D366] hover:text-[#25D366] transition-colors">
-                <RiWhatsappLine size={16} />
+              <a href={siteConfig.social.swiggy} target="_blank" rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:opacity-80"
+                style={{ background: "rgba(255,255,255,0.1)" }}>
+                <SiSwiggy size={15} />
               </a>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-white font-semibold text-sm uppercase tracking-widest mb-5">Explore</h4>
-            <ul className="space-y-3">
-              {[
-                { href: "/menu", label: "Our Menu" },
-                { href: "/experiences", label: "Dining Experiences" },
-                { href: "/events", label: "Upcoming Events" },
-                { href: "/gallery", label: "Gallery" },
-                { href: "/about", label: "Our Story" },
-                { href: "/reservations", label: "Reserve a Table" },
-              ].map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="text-white/50 text-sm hover:text-[#FF4D00] transition-colors">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Hours */}
-          <div>
-            <h4 className="text-white font-semibold text-sm uppercase tracking-widest mb-5">Hours</h4>
-            <ul className="space-y-3">
-              {siteConfig.hours.map((h) => (
-                <li key={h.days}>
-                  <p className="text-white/80 text-sm font-medium">{h.days}</p>
-                  {h.lunch !== "Closed" ? (
-                    <>
-                      <p className="text-white/40 text-xs">{h.lunch}</p>
-                      <p className="text-white/40 text-xs">{h.dinner}</p>
-                    </>
-                  ) : (
-                    <p className="text-[#FF4D00] text-xs">Closed</p>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Links */}
+          {Object.entries(footerLinks).map(([heading, links]) => (
+            <div key={heading}>
+              <h4 className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--sage-light)" }}>
+                {heading}
+              </h4>
+              <ul className="flex flex-col gap-2.5">
+                {links.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href} className="text-sm transition-colors hover:text-white" style={{ color: "rgba(232,223,208,0.7)" }}>
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
           {/* Contact */}
           <div>
-            <h4 className="text-white font-semibold text-sm uppercase tracking-widest mb-5">Find Us</h4>
-            <ul className="space-y-4">
-              <li className="flex gap-3 text-white/50 text-sm">
-                <FiMapPin className="text-[#FF4D00] mt-0.5 shrink-0" />
-                <span>{siteConfig.address.street}, {siteConfig.address.area}, {siteConfig.address.city} {siteConfig.address.pin}</span>
+            <h4 className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--sage-light)" }}>
+              Find Us
+            </h4>
+            <ul className="flex flex-col gap-3">
+              <li className="flex gap-2.5 text-sm" style={{ color: "rgba(232,223,208,0.75)" }}>
+                <HiLocationMarker className="shrink-0 mt-0.5" style={{ color: "var(--sage-light)" }} />
+                {siteConfig.address}
               </li>
-              <li>
-                <a href={`tel:${siteConfig.contact.phone}`} className="flex gap-3 text-white/50 text-sm hover:text-[#FF4D00] transition-colors">
-                  <FiPhone className="text-[#FF4D00] shrink-0 mt-0.5" />
-                  {siteConfig.contact.phone}
-                </a>
+              <li className="flex gap-2.5 text-sm" style={{ color: "rgba(232,223,208,0.75)" }}>
+                <HiPhone className="shrink-0 mt-0.5" style={{ color: "var(--sage-light)" }} />
+                {siteConfig.phone}
               </li>
-              <li>
-                <a href={`mailto:${siteConfig.contact.email}`} className="flex gap-3 text-white/50 text-sm hover:text-[#FF4D00] transition-colors">
-                  <FiMail className="text-[#FF4D00] shrink-0 mt-0.5" />
-                  {siteConfig.contact.email}
-                </a>
+              <li className="flex gap-2.5 text-sm" style={{ color: "rgba(232,223,208,0.75)" }}>
+                <HiMail className="shrink-0 mt-0.5" style={{ color: "var(--sage-light)" }} />
+                {siteConfig.email}
               </li>
             </ul>
+            <div className="mt-4 text-xs" style={{ color: "rgba(232,223,208,0.5)" }}>
+              <p>Mon–Fri: {siteConfig.hours.weekdays}</p>
+              <p>Sat–Sun: {siteConfig.hours.weekends}</p>
+            </div>
           </div>
         </div>
 
-        <div className="ember-divider mb-6" />
-
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-white/30 text-xs">
-          <p>© 2025 Zest & Ember. All rights reserved. Bandra West, Mumbai.</p>
-          <p>Crafted with fire &amp; intention.</p>
+        <div className="pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-3" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+          <p className="text-xs" style={{ color: "rgba(232,223,208,0.4)" }}>
+            © {new Date().getFullYear()} Roots & Bowls. All rights reserved.
+          </p>
+          <p className="text-xs" style={{ color: "rgba(232,223,208,0.4)" }}>
+            Delivery radius: {siteConfig.deliveryRadius}
+          </p>
+          <p className="text-xs" style={{ color: "rgba(232,223,208,0.4)" }}>
+                     <span>Made with ♥️ by <a href="https://business-sathi.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-md text-white font-semibold hover:text-amber-400"> Business Sathi</a></span>
+          </p>
         </div>
       </div>
     </footer>

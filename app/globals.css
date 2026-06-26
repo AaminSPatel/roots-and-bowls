@@ -1,201 +1,161 @@
 @import "tailwindcss";
 
 :root {
-  --charcoal: #1a1a1a;
-  --charcoal-800: #242424;
-  --charcoal-700: #2e2e2e;
-  --charcoal-600: #3a3a3a;
-  --orange: #ff4d00;
-  --orange-dark: #cc3d00;
-  --amber: #ffb800;
-  --amber-light: #ffd166;
-  --white: #ffffff;
-  --white-60: rgba(255, 255, 255, 0.6);
-  --white-20: rgba(255, 255, 255, 0.12);
+  --sage: #7C9070;
+  --sage-light: #a8be9a;
+  --sage-dark: #5a6e52;
+  --terracotta: #C1603D;
+  --terracotta-light: #d4825f;
+  --warm-white: #FAFAF7;
+  --cream: #F4F0E8;
+  --olive: #2C3B2A;
+  --olive-light: #4a5e48;
+  --sand: #E8DFD0;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
 }
 
-* {
+/* * {
   box-sizing: border-box;
-}
+  margin: 0;
+  padding: 0;
+} */
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--charcoal);
-  color: var(--white);
-  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  background-color: var(--warm-white);
+  color: var(--olive);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── EMBER PARTICLE FLOAT ── */
-@keyframes emberFloat {
-  0% {
-    transform: translateY(0) translateX(0) scale(1);
-    opacity: 1;
-  }
-  25% {
-    transform: translateY(-30vh) translateX(15px) scale(0.8);
-    opacity: 0.8;
-  }
-  50% {
-    transform: translateY(-60vh) translateX(-10px) scale(0.6);
-    opacity: 0.5;
-  }
-  75% {
-    transform: translateY(-85vh) translateX(20px) scale(0.3);
-    opacity: 0.2;
-  }
-  100% {
-    transform: translateY(-100vh) translateX(0px) scale(0.1);
-    opacity: 0;
-  }
+/* ─── Leaf Flutter Animation ─── */
+@keyframes leafFloat {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  25%  { transform: translateY(-12px) rotate(5deg); }
+  50%  { transform: translateY(-6px) rotate(-3deg); }
+  75%  { transform: translateY(-14px) rotate(4deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
 }
 
-@keyframes emberPulse {
-  0%, 100% { opacity: 0.9; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.7); }
+@keyframes leafSway {
+  0%   { transform: rotate(-8deg) translateY(0); }
+  50%  { transform: rotate(8deg) translateY(-8px); }
+  100% { transform: rotate(-8deg) translateY(0); }
 }
 
-@keyframes emberGlow {
-  0%, 100% { box-shadow: 0 0 6px 2px rgba(255, 77, 0, 0.6); }
-  50% { box-shadow: 0 0 14px 5px rgba(255, 184, 0, 0.8); }
+@keyframes leafDrift {
+  0%   { transform: translateX(0) translateY(0) rotate(0deg); opacity: 0.7; }
+  33%  { transform: translateX(10px) translateY(-20px) rotate(12deg); opacity: 1; }
+  66%  { transform: translateX(-8px) translateY(-10px) rotate(-6deg); opacity: 0.8; }
+  100% { transform: translateX(0) translateY(0) rotate(0deg); opacity: 0.7; }
 }
 
-.ember-particle {
+.leaf-float { animation: leafFloat 6s ease-in-out infinite; }
+.leaf-sway  { animation: leafSway 4s ease-in-out infinite; }
+.leaf-drift { animation: leafDrift 8s ease-in-out infinite; }
+
+/* ─── Bounce-in for hero elements ─── */
+@keyframes bounceIn {
+  0%   { transform: scale(0.3) translateY(40px); opacity: 0; }
+  60%  { transform: scale(1.05) translateY(-8px); opacity: 1; }
+  80%  { transform: scale(0.97) translateY(4px); }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.bounce-in { animation: bounceIn 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+
+/* ─── Fade Up ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.6s ease both; }
+
+/* ─── Counter animate ─── */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.count-up { animation: countUp 0.5s ease both; }
+
+/* ─── Watercolor wash overlay ─── */
+.watercolor-overlay {
+  position: relative;
+}
+.watercolor-overlay::before {
+  content: '';
   position: absolute;
-  border-radius: 50%;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 20% 30%, rgba(124,144,112,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(193,96,61,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 50%, rgba(232,223,208,0.1) 0%, transparent 80%);
   pointer-events: none;
-  animation: emberFloat linear infinite;
+  z-index: 0;
 }
 
-/* ── NEON GLOW BORDER ── */
-.glow-border {
-  border: 1px solid rgba(255, 77, 0, 0.3);
-  transition: border-color 0.3s, box-shadow 0.3s;
+/* ─── Organic blob section dividers ─── */
+.blob-divider-top {
+  clip-path: ellipse(55% 60% at 50% 100%);
 }
-.glow-border:hover {
-  border-color: rgba(255, 77, 0, 0.7);
-  box-shadow: 0 0 20px rgba(255, 77, 0, 0.25), 0 0 60px rgba(255, 77, 0, 0.1);
+.blob-divider-bottom {
+  clip-path: ellipse(60% 55% at 50% 0%);
 }
-
-/* ── TYPEWRITER ANIMATION ── */
-@keyframes typewriter {
-  from { width: 0; }
-  to { width: 100%; }
+.blob-wave {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 50% 90%, 15% 100%, 0 85%);
 }
 
-@keyframes blinkCaret {
-  0%, 100% { border-color: transparent; }
-  50% { border-color: var(--orange); }
-}
-
-.typewriter-text {
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typewriter 2.5s steps(30) 0.5s forwards;
-  width: 0;
-}
-
-/* ── ORANGE GRADIENT TEXT ── */
-.gradient-text {
-  background: linear-gradient(135deg, var(--orange) 0%, var(--amber) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ── CARD 3D TILT (handled via framer motion but fallback) ── */
-.tilt-card {
+/* ─── Bowl 3D card tilt ─── */
+.card-3d {
   transform-style: preserve-3d;
-  transition: transform 0.15s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-3d:hover {
+  transform: perspective(800px) rotateY(-4deg) rotateX(4deg) translateY(-6px);
+  box-shadow: 16px 24px 48px rgba(44,59,42,0.15), 0 2px 8px rgba(44,59,42,0.08);
 }
 
-/* ── ORANGE GLOW ON HOVER ── */
-.orange-glow-hover {
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-.orange-glow-hover:hover {
-  box-shadow: 0 20px 60px rgba(255, 77, 0, 0.3);
-  transform: translateY(-4px);
-}
-
-/* ── FIRE GRADIENT BG ── */
-.fire-gradient {
-  background: radial-gradient(ellipse at 50% 100%, rgba(255, 77, 0, 0.25) 0%, rgba(255, 184, 0, 0.08) 40%, transparent 70%);
-}
-
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--charcoal-800);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--orange-dark);
-  border-radius: 3px;
-}
-
-/* ── SELECTION ── */
-::selection {
-  background: var(--orange);
+/* ─── Smooth tab transitions ─── */
+.tab-active {
+  background-color: var(--sage);
   color: white;
+  transition: all 0.25s ease;
+}
+.tab-inactive {
+  background-color: transparent;
+  color: var(--olive-light);
+  transition: all 0.25s ease;
 }
 
-/* ── SECTION DIVIDER ── */
-.ember-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--orange), var(--amber), transparent);
-}
+/* ─── Dietary tag pills ─── */
+.tag-v   { background: #e8f4e8; color: #3d7a3d; }
+.tag-vg  { background: #e0f0e0; color: #2d6a2d; }
+.tag-gf  { background: #fff3e0; color: #b35a00; }
+.tag-df  { background: #e8f0ff; color: #3358aa; }
+.tag-lf  { background: #fce8e8; color: #aa3344; }
 
-/* ── NAV BLUR ── */
-.nav-blur {
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-}
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--warm-white); }
+::-webkit-scrollbar-thumb { background: var(--sage-light); border-radius: 3px; }
 
-/* ── TAG STYLES ── */
-.tag-v { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
-.tag-vg { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
-.tag-gf { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
-.tag-spicy { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+/* ─── Selection ─── */
+::selection { background: var(--sage-light); color: var(--olive); }
 
-/* ── BESTSELLER BADGE ── */
-.bestseller-badge {
-  background: linear-gradient(135deg, #ff4d00, #ffb800);
-  color: white;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 2px;
-}
+/* ─── Focus ring ─── */
+:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
 
-/* ── MENU TAB ACTIVE ── */
-.menu-tab-active {
-  background: linear-gradient(135deg, var(--orange), var(--amber));
-  color: white;
-}
-.menu-tab-inactive {
-  background: var(--charcoal-700);
-  color: rgba(255, 255, 255, 0.6);
-}
-.menu-tab-inactive:hover {
-  background: var(--charcoal-600);
-  color: white;
-}
+/* ─── Responsive image fill ─── */
+img { max-width: 100%; display: block; }
 
-/* ── FOCUS VISIBLE ── */
-:focus-visible {
-  outline: 2px solid var(--orange);
-  outline-offset: 3px;
-}
-
+/* ─── Reduced motion ─── */
 @media (prefers-reduced-motion: reduce) {
-  .ember-particle, .typewriter-text {
-    animation: none;
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

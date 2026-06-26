@@ -1,135 +1,124 @@
-"use client";
-
+'use client';
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiX } from "react-icons/fi";
-import { GiFireBowl } from "react-icons/gi";
+import { HiMenu, HiX } from "react-icons/hi";
+import { GiLeafSwirl } from "react-icons/gi";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/menu", label: "Menu" },
-  { href: "/experiences", label: "Experiences" },
-  { href: "/events", label: "Events" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/meal-prep", label: "Meal Prep" },
+  { href: "/catering", label: "Catering" },
+  { href: "/blog", label: "Blog" },
   { href: "/about", label: "Our Story" },
   { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+  useEffect(() => { setOpen(false); }, [pathname]);
 
   return (
-    <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 nav-blur ${
-          scrolled ? "py-3 border-b border-white/10 bg-[#1a1a1a]/90" : "py-5 bg-transparent"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-[#FF4D00] text-2xl transition-transform group-hover:scale-110">
-              <GiFireBowl />
-            </span>
-            <span
-              className="text-white font-bold text-xl tracking-tight"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              Zest &amp; Ember
-            </span>
-          </Link>
+    <header
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      style={{
+        background: scrolled ? "rgba(250,250,247,0.97)" : "transparent",
+        backdropFilter: scrolled ? "blur(12px)" : "none",
+        boxShadow: scrolled ? "0 1px 24px rgba(44,59,42,0.08)" : "none",
+      }}
+    >
+      <nav className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 group">
+          <span className="text-2xl transition-transform group-hover:scale-110 duration-300">🌿</span>
+          <span style={{ fontFamily: "var(--font-display)", color: "var(--olive)" }} className="font-bold text-lg leading-tight">
+            Roots<span style={{ color: "var(--terracotta)" }}>&</span>Bowls
+          </span>
+        </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
+        {/* Desktop Links */}
+        <ul className="hidden md:flex items-center gap-1">
+          {navLinks.map((l) => (
+            <li key={l.href}>
               <Link
-                key={link.href}
-                href={link.href}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  pathname === link.href
-                    ? "text-[#FF4D00]"
-                    : "text-white/70 hover:text-white"
-                }`}
+                href={l.href}
+                className="px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200"
+                style={{
+                  color: pathname === l.href ? "var(--sage-dark)" : "var(--olive-light)",
+                  background: pathname === l.href ? "rgba(124,144,112,0.12)" : "transparent",
+                }}
               >
-                {link.label}
+                {l.label}
               </Link>
-            ))}
-          </div>
+            </li>
+          ))}
+        </ul>
 
-          {/* Reserve CTA */}
+        {/* CTA */}
+        <div className="hidden md:flex items-center gap-3">
           <Link
-            href="/reservations"
-            className="hidden lg:block px-5 py-2.5 text-sm font-semibold rounded-full text-white transition-all duration-200 hover:opacity-90 hover:scale-105"
-            style={{ background: "linear-gradient(135deg, #FF4D00, #FFB800)" }}
+            href="/order"
+            className="px-4 py-2 rounded-full text-sm font-semibold text-white transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
+            style={{ background: "var(--terracotta)" }}
           >
-            Reserve a Table
+            Order Now
           </Link>
-
-          {/* Mobile Toggle */}
-          <button
-            className="lg:hidden text-white p-2 text-2xl"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <FiX /> : <FiMenu />}
-          </button>
         </div>
+
+        {/* Mobile burger */}
+        <button
+          className="md:hidden p-2 rounded-lg"
+          style={{ color: "var(--olive)" }}
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+        >
+          {open ? <HiX size={22} /> : <HiMenu size={22} />}
+        </button>
       </nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-[#1a1a1a] flex flex-col pt-24 px-6 pb-8"
-          >
-            <div className="flex flex-col gap-2 flex-1">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06 }}
+      {/* Mobile drawer */}
+      {open && (
+        <div
+          className="md:hidden absolute top-full left-0 right-0 border-t"
+          style={{ background: "rgba(250,250,247,0.99)", borderColor: "var(--sand)" }}
+        >
+          <ul className="flex flex-col px-4 py-3 gap-1">
+            {navLinks.map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className="block px-3 py-2.5 rounded-lg text-sm font-medium"
+                  style={{
+                    color: pathname === l.href ? "var(--sage-dark)" : "var(--olive)",
+                    background: pathname === l.href ? "rgba(124,144,112,0.1)" : "transparent",
+                  }}
                 >
-                  <Link
-                    href={link.href}
-                    className={`block text-2xl font-semibold py-3 border-b border-white/10 transition-colors ${
-                      pathname === link.href ? "text-[#FF4D00]" : "text-white/80 hover:text-white"
-                    }`}
-                    style={{ fontFamily: "'Playfair Display', serif" }}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-            <Link
-              href="/reservations"
-              className="block text-center w-full py-4 rounded-full text-white font-bold text-lg mt-6"
-              style={{ background: "linear-gradient(135deg, #FF4D00, #FFB800)" }}
-            >
-              Reserve a Table
-            </Link>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+            <li className="pt-2 pb-1">
+              <Link
+                href="/order"
+                className="block text-center px-4 py-2.5 rounded-full text-sm font-semibold text-white"
+                style={{ background: "var(--terracotta)" }}
+              >
+                Order Now
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
+    </header>
   );
 }
